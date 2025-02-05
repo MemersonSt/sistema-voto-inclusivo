@@ -1,0 +1,30 @@
+[
+  {
+    "posicion": 1,
+    "nombre": "Paritido social cristiano",
+    "lista": "23",
+    "presidente": "Piter Parker",
+    "vicepresidente": "homabre de las arañas 2"
+  },
+  {
+    "posicion": 2,
+    "nombre": "Partido de la liberación dominicana",
+    "lista": "50",
+    "presidente": "Danilo Medina",
+    "vicepresidente": "Margarita Cedeño"
+  },
+  {
+    "posicion": 3,
+    "nombre": "Partido revolucionario moderno",
+    "lista": "21",
+    "presidente": "Luis Abinader",
+    "vicepresidente": "Raquel Peña"
+  },
+  {
+    "posicion": 4,
+    "nombre": "Partido reformista social cristiano",
+    "lista": "40",
+    "presidente": "Leonel Fernandez",
+    "vicepresidente": "Rafael Alburquerque"
+  }
+]
