@@ -1,24 +1,78 @@
 import { useEffect, useState, useRef } from "react";
 import DetectorHands from "../utils/detector-hands";
+import { Camera } from "@mediapipe/camera_utils";
+import { Hands } from "@mediapipe/hands";
+import { FaceDetection } from "@mediapipe/face_detection";
 
 export default function RealizarVoto() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  const [voto, setVoto] = useState(null);
 
   useEffect(() => {
-    const initDetector = async () => {
-      if (videoRef.current) {
-        const detector = new DetectorHands(videoRef.current);
-        await detector.initCamera();
-        await detector.initHandDetection(); // Iniciar detección de manos
-        setVoto(detector);
-      }
-    };
+    if (!videoRef.current || !canvasRef.current) return;
 
-    initDetector().catch((error) => {
-      console.error("Error initializing hand detector:", error);
+    const hands = new Hands({
+      locateFile: (file) =>
+        `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
     });
+
+    hands.setOptions({
+      maxNumHands: 2,
+      modelComplexity: 1,
+      minDetectionConfidence: 0.8,
+      minTrackingConfidence: 0.8,
+    });
+
+    hands.onResults((results) => {
+      const canvasCtx = canvasRef.current.getContext("2d");
+      canvasCtx.clearRect(
+        0,
+        0,
+        canvasRef.current.width,
+        canvasRef.current.height
+      );
+      if (results.multiHandLandmarks) {
+        results.multiHandLandmarks.forEach((landmarks) => {
+          let fingersUp = 0;
+
+          // Thumb
+          if (landmarks[4].x < landmarks[3].x) fingersUp++;
+
+          // Other fingers
+          for (let i = 8; i <= 20; i += 4) {
+            if (landmarks[i].y < landmarks[i - 2].y) fingersUp++;
+          }
+
+          // Draw landmarks
+          landmarks.forEach((point) => {
+            canvasCtx.beginPath();
+            canvasCtx.arc(
+              point.x * canvasRef.current.width,
+              point.y * canvasRef.current.height,
+              5,
+              0,
+              2 * Math.PI
+            );
+            canvasCtx.fillStyle = "red";
+            canvasCtx.fill();
+          });
+
+          // Draw number of fingers up
+          canvasCtx.font = "30px Arial";
+          canvasCtx.fillStyle = "blue";
+          canvasCtx.fillText(`Fingers up: ${fingersUp}`, 10, 50);
+        });
+      }
+    });
+
+    const camera = new Camera(videoRef.current, {
+      onFrame: async () => {
+        await hands.send({ image: videoRef.current });
+      },
+      width: 640,
+      height: 480,
+    });
+    camera.start();
   }, []);
 
   return (
