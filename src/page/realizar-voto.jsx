@@ -1,8 +1,6 @@
-import { useEffect, useState, useRef } from "react";
-import DetectorHands from "../utils/detector-hands";
+import { useEffect, useRef } from "react";
 import { Camera } from "@mediapipe/camera_utils";
 import { Hands } from "@mediapipe/hands";
-import { FaceDetection } from "@mediapipe/face_detection";
 
 export default function RealizarVoto() {
   const videoRef = useRef(null);
@@ -32,16 +30,17 @@ export default function RealizarVoto() {
         canvasRef.current.height
       );
       if (results.multiHandLandmarks) {
+        // console.log(results.multiHandLandmarks);
+        let fingersUp = 0;
         results.multiHandLandmarks.forEach((landmarks) => {
-          let fingersUp = 0;
-
           // Thumb
-          if (landmarks[4].x < landmarks[3].x) fingersUp++;
+          if (landmarks[5].x < landmarks[4].x) fingersUp++;
 
           // Other fingers
-          for (let i = 8; i <= 20; i += 4) {
-            if (landmarks[i].y < landmarks[i - 2].y) fingersUp++;
-          }
+          const fingerTips = [8, 12, 16, 20];
+          fingerTips.forEach((tip) => {
+            if (landmarks[tip].y < landmarks[tip - 2].y) fingersUp++;
+          });
 
           // Draw landmarks
           landmarks.forEach((point) => {
@@ -56,12 +55,11 @@ export default function RealizarVoto() {
             canvasCtx.fillStyle = "red";
             canvasCtx.fill();
           });
-
-          // Draw number of fingers up
-          canvasCtx.font = "30px Arial";
-          canvasCtx.fillStyle = "blue";
-          canvasCtx.fillText(`Fingers up: ${fingersUp}`, 10, 50);
         });
+        // Draw number of fingers up
+        canvasCtx.font = "30px Arial";
+        canvasCtx.fillStyle = "red";
+        canvasCtx.fillText(`Fingers up: ${fingersUp}`, 10, 50);
       }
     });
 
