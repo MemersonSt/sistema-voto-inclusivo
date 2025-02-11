@@ -5,6 +5,7 @@ import Candidatos from "./page/candidatos";
 import RealizarVoto from "./page/realizar-voto";
 import Instrucciones from "./page/instrucciones";
 import HeaderComp from "./design-component/header_comp";
+import Resultados from "./page/resultados";
 
 const Routes = () => {
   return useRoutes([
@@ -27,6 +28,10 @@ const Routes = () => {
         {
           path: "votacion",
           element: <RealizarVoto />,
+        },
+        {
+          path: "resultados",
+          element: <Resultados />,
         },
       ],
     },

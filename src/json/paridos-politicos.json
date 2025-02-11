@@ -4,27 +4,31 @@
     "nombre": "social cristiano",
     "lista": "23",
     "presidente": "Piter Parker",
-    "vicepresidente": "homabre de las arañas 2"
+    "vicepresidente": "homabre de las arañas 2",
+    "votos": 0
   },
   {
     "posicion": 2,
     "nombre": "la liberación dominicana",
     "lista": "50",
     "presidente": "Danilo Medina",
-    "vicepresidente": "Margarita Cedeño"
+    "vicepresidente": "Margarita Cedeño",
+    "votos": 0
   },
   {
     "posicion": 3,
     "nombre": "revolucionario moderno",
     "lista": "21",
     "presidente": "Luis Abinader",
-    "vicepresidente": "Raquel Peña"
+    "vicepresidente": "Raquel Peña",
+    "votos": 0
   },
   {
     "posicion": 4,
     "nombre": "reformista social cristiano",
     "lista": "40",
     "presidente": "Leonel Fernandez",
-    "vicepresidente": "Rafael Alburquerque"
+    "vicepresidente": "Rafael Alburquerque",
+    "votos": 0
   }
 ]

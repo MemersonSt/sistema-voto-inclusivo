@@ -1,0 +1,45 @@
+.bodycontainer {
+    margin-top: 20px;
+    text-align: center;
+    padding: 20px;
+    background-color: #989fa3;
+    min-height: 100vh;
+}
+
+
+  .title {
+    font-size: 32px;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .gridContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    color: black;
+  }
+  
+  .card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    max-width: 600px;
+  }
+  
+  .candidato {
+    text-align: left;
+  }
+  
+  .votacion {
+    font-size: 20px;
+    font-weight: bold;
+    color: #d9534f;
+  }
+  

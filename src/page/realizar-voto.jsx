@@ -28,9 +28,32 @@ export default function RealizarVoto() {
     return () => clearTimeout(timer); // Limpiar el temporizador en el desmontaje
   }, [presentacionIniciada]);
 
+  const generateImgNmae = (partido) => {
+    const siglas = partido
+      .split(" ")
+      .map((word) => word[0])
+      .join("");
+    return `${siglas}`;
+  };
+
   return (
-    <div className="w-full h-screen flex justify-center items-center">
-      <div className="w-1/2 h-1/2">
+    <div className="w-full h-screen flex flex-col justify-center items-center gap-1 ">
+      <div className="flex flex-row justify-between items-center gap-4 rounded-2xl p-4">
+        {PartidosPolitos.map((partido) => (
+          <div key={partido.nombre} className="flex flex-col items-center">
+            <h3>{partido.posicion}</h3>
+            <div className="w-20 h-20 rounded-full bg-gray-300 flex items-center justify-center">
+              {generateImgNmae(partido.nombre)}
+            </div>
+            <h2 className="font-bold text-lg text-center">{partido.nombre}</h2>
+            <ul>
+              <li>{partido.presidente}</li>
+              <li>{partido.vicepresidente}</li>
+            </ul>
+          </div>
+        ))}
+      </div>
+      <div className="w-1/2 h-1/2 rounded-2xl p-4">
         <VisionArtificialCamara />
       </div>
     </div>
