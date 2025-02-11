@@ -166,7 +166,7 @@ export default function VisionArtificialCamara() {
       setFingersUp(0);
       setIsHandDetected(false);
       setTimeout(() => {
-        navigate(rutas.votacion);
+        navigate(rutas.candidatos);
       }, 3000);
     }
     if (location.pathname === rutas.votacion && startVatation === true) {

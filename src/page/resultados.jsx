@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "../styles/style-resultados.module.css";
-import Candidato from "../components/candidato";
 import partidosPoliticos from "../json/paridos-politicos.json";
+import Candidato from "../components/candidato";
 
 export default function Resultados() {
   const [votos, setVotos] = useState(partidosPoliticos.map(() => 0));
@@ -44,7 +44,7 @@ export default function Resultados() {
           <Candidato
             key={candidato.posicion}
             candidato={candidato}
-            votos={votos.votos}
+            votos={candidato.votos}
           />
         ))}
       </div>

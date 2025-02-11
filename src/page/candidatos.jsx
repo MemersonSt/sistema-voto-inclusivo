@@ -1,5 +1,4 @@
-import { useContext, useEffect } from "react";
-import { useVisionArtificial } from "../hooks/useVisionArtificial";
+import { useContext, useEffect } from "react"
 import PartidosPolitos from "../json/paridos-politicos.json";
 import Voz from "../utils/voz";
 import { VisionArtificialContext } from "../context/visionArtificialContext";

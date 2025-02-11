@@ -5,15 +5,15 @@
     "lista": "23",
     "presidente": "Piter Parker",
     "vicepresidente": "homabre de las arañas 2",
-    "votos": 0
+    "votos": 20
   },
   {
     "posicion": 2,
-    "nombre": "la liberación dominicana",
+    "nombre": "la liberación",
     "lista": "50",
     "presidente": "Danilo Medina",
     "vicepresidente": "Margarita Cedeño",
-    "votos": 0
+    "votos": 15
   },
   {
     "posicion": 3,
@@ -21,14 +21,14 @@
     "lista": "21",
     "presidente": "Luis Abinader",
     "vicepresidente": "Raquel Peña",
-    "votos": 0
+    "votos": 10
   },
   {
     "posicion": 4,
-    "nombre": "reformista social cristiano",
+    "nombre": "Nacional Socialista Obrero",
     "lista": "40",
     "presidente": "Leonel Fernandez",
     "vicepresidente": "Rafael Alburquerque",
-    "votos": 0
+    "votos": 5
   }
 ]

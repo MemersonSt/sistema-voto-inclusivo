@@ -17,6 +17,7 @@ const VisionArtificialContext = createContext({
 
 // eslint-disable-next-line react/prop-types
 function VisionArtificialProvider({ children }) {
+  localStorage.setItem("partidos", JSON.stringify(PartidosPoliticos));
   const videoref = useRef(null);
   const canvasRef = useRef(null);
   const handsRef = useRef(null);
@@ -173,7 +174,7 @@ function VisionArtificialProvider({ children }) {
         } else {
           setCandidatoSelect({});
         }
-      }, 2000);
+      }, 1000);
     }
   }, [fingersUp, startVatation]);
 
