@@ -16,6 +16,7 @@ export default function VisionArtificialCamara() {
   const [isHandDetected, setIsHandDetected] = useState(false);
   const [fingersUp, setFingersUp] = useState(0);
   const [candidatoSelect, setCandidatoSelect] = useState({});
+  const [startVatation, setStartVatation] = useState(false);
 
   const rutas = {
     presentacion: "/",
@@ -168,9 +169,15 @@ export default function VisionArtificialCamara() {
         navigate(rutas.votacion);
       }, 3000);
     }
-    if (location.pathname === rutas.votacion) {
+    if (location.pathname === rutas.votacion && startVatation === true) {
       console.log("Votación en curso");
-      setCandidatoSelect(PartidosPoliticos[fingersUp]);
+      setTimeout(() => {
+        const exists = PartidosPoliticos[fingersUp];
+        if (!exists) return;
+        setCandidatoSelect(PartidosPoliticos[fingersUp]);
+        const voz = new Voz();
+        voz.speak(`Usted ha seleccionado a ${candidatoSelect.nombre}`);
+      }, 3000);
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -189,10 +196,16 @@ export default function VisionArtificialCamara() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isHandDetected]);
 
+  // useEffect(() => {
+  //   const voz = new Voz();
+  //   voz.speak(`Usted ha seleccionado a ${candidatoSelect.nombre}`);
+  // }, [candidatoSelect]);
+
   useEffect(() => {
-    const voz = new Voz();
-    voz.speak(`Usted ha seleccionado a ${candidatoSelect.nombre}`);
-  }, [candidatoSelect]);
+    if (location.pathname === rutas.votacion && fingersUp === 10) {
+      setStartVatation(true);
+    }
+  }, [fingersUp]);
 
   return (
     <div

@@ -4,10 +4,12 @@ import PartidosPolitos from "../json/paridos-politicos.json";
 import { useEffect, useState } from "react";
 
 export default function RealizarVoto() {
-  // const [candidatos, setCandidatos] = useState(PartidosPolitos || []);
-  // const 
+  const [presentacionIniciada, setPresentacionIniciada] = useState(false);
 
   const iniciarPresentacion = () => {
+    if (presentacionIniciada) return; // Verificación adicional
+
+    setPresentacionIniciada(true);
     const voz = new Voz();
     voz.speak("A continuación se presentarán los candidatos.");
     PartidosPolitos.forEach((partido) => {
@@ -18,10 +20,13 @@ export default function RealizarVoto() {
   };
 
   useEffect(() => {
-    setTimeout(() => {
+    if (presentacionIniciada) return; // Verificación adicional
+    const timer = setTimeout(() => {
       iniciarPresentacion();
-    }, 1000);
-  }, []);
+    }, 2000);
+
+    return () => clearTimeout(timer); // Limpiar el temporizador en el desmontaje
+  }, [presentacionIniciada]);
 
   return (
     <div className="w-full h-screen flex justify-center items-center">
