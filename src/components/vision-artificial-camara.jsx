@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Camera } from "@mediapipe/camera_utils";
 import { Hands } from "@mediapipe/hands";
 import { useLocation, useNavigate } from "react-router-dom";
+import PartidosPoliticos from "../json/paridos-politicos.json";
+import Voz from "../utils/voz";
 
 export default function VisionArtificialCamara() {
   const videoref = useRef(null);
@@ -13,6 +15,7 @@ export default function VisionArtificialCamara() {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [isHandDetected, setIsHandDetected] = useState(false);
   const [fingersUp, setFingersUp] = useState(0);
+  const [candidatoSelect, setCandidatoSelect] = useState({});
 
   const rutas = {
     presentacion: "/",
@@ -165,7 +168,13 @@ export default function VisionArtificialCamara() {
         navigate(rutas.votacion);
       }, 3000);
     }
-  }, [fingersUp, navigate]);
+    if (location.pathname === rutas.votacion) {
+      console.log("Votación en curso");
+      setCandidatoSelect(PartidosPoliticos[fingersUp]);
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fingersUp]);
 
   useEffect(() => {
     if (isHandDetected && location.pathname === rutas.presentacion) {
@@ -176,7 +185,14 @@ export default function VisionArtificialCamara() {
         navigate(rutas.instrucciones);
       }, 3000);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isHandDetected]);
+
+  useEffect(() => {
+    const voz = new Voz();
+    voz.speak(`Usted ha seleccionado a ${candidatoSelect.nombre}`);
+  }, [candidatoSelect]);
 
   return (
     <div
